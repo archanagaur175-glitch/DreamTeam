@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.weight
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -158,8 +157,8 @@ fun LoggerScreen(
             ) {
                 SectionHeader("Log a night's sleep")
                 Row(horizontalArrangement = Arrangement.spacedBy(Dimens.md)) {
-                    TimeField("Bed time", bedTime) { pickerTarget = PickerTarget.BED }
-                    TimeField("Wake time", wakeTime) { pickerTarget = PickerTarget.WAKE }
+                    TimeField("Bed time", bedTime, Modifier.weight(1f)) { pickerTarget = PickerTarget.BED }
+                    TimeField("Wake time", wakeTime, Modifier.weight(1f)) { pickerTarget = PickerTarget.WAKE }
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text("Quality", style = MaterialTheme.typography.bodyMedium, color = TextSecondary)
@@ -235,10 +234,14 @@ fun LoggerScreen(
 }
 
 @Composable
-private fun TimeField(label: String, time: LocalTime, onClick: () -> Unit) {
+private fun TimeField(
+    label: String,
+    time: LocalTime,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
     Column(
-        modifier = Modifier
-            .weight(1f)
+        modifier = modifier
             .background(NightSurface, RoundedCornerShape(Dimens.cardCorner))
             .padding(Dimens.md),
         horizontalAlignment = Alignment.CenterHorizontally,
