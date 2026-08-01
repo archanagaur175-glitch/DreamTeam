@@ -40,18 +40,17 @@ fun ThemeChip(
     emoji: String? = null,
 ) {
     val shape = RoundedCornerShape(Dimens.chipCorner)
+    val backgroundBrush: Brush = if (selected) {
+        Brush.horizontalGradient(
+            listOf(AccentIndigo.copy(alpha = 0.9f), AccentViolet.copy(alpha = 0.9f)),
+        )
+    } else {
+        Brush.solidColor(NightSurfaceHigh)
+    }
     Box(
         modifier = modifier
             .clip(shape)
-            .background(
-                if (selected) {
-                    Brush.horizontalGradient(
-                        listOf(AccentIndigo.copy(alpha = 0.9f), AccentViolet.copy(alpha = 0.9f)),
-                    )
-                } else {
-                    NightSurfaceHigh
-                }
-            )
+            .background(backgroundBrush)
             .border(
                 width = 1.dp,
                 color = if (selected) AccentViolet else NightBorder,

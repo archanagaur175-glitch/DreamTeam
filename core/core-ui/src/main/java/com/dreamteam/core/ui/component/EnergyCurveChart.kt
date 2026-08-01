@@ -1,6 +1,5 @@
 package com.dreamteam.core.ui.component
 
-import android.graphics.BlurMaskFilter
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -17,14 +16,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.PathMeasure
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.unit.dp
 import com.dreamteam.core.common.toMinutesSinceMidnight
 import com.dreamteam.core.ui.theme.AccentAmber
@@ -117,23 +113,25 @@ fun EnergyCurveChart(
             partial.addPath(fullPath)
         }
 
-        // soft glow layer (native blur)
-        drawIntoCanvas { canvas ->
-            val glowPaint = Paint().apply {
-                color = AccentViolet
-                maskFilter = BlurMaskFilter(22.dp.toPx(), BlurMaskFilter.Blur.NORMAL)
-                style = PaintingStyle.STROKE
-                strokeWidth = 9.dp.toPx()
-                strokeCap = StrokeCap.ROUND
-            }
-            canvas.drawPath(partial, glowPaint)
-        }
-
-        // main gradient stroke
+        // glow: layered stroke passes (no native-paint dependency)
+        val gradientBrush = Brush.horizontalGradient(listOf(AccentIndigo, AccentViolet, AccentAmber))
         drawPath(
             path = partial,
-            brush = Brush.horizontalGradient(listOf(AccentIndigo, AccentViolet, AccentAmber)),
+            brush = gradientBrush,
+            style = Stroke(width = 14.dp.toPx(), cap = StrokeCap.Round),
+            alpha = 0.08f,
+        )
+        drawPath(
+            path = partial,
+            brush = gradientBrush,
+            style = Stroke(width = 8.dp.toPx(), cap = StrokeCap.Round),
+            alpha = 0.20f,
+        )
+        drawPath(
+            path = partial,
+            brush = gradientBrush,
             style = Stroke(width = 2.5.dp.toPx(), cap = StrokeCap.Round),
+            alpha = 0.95f,
         )
 
         // --- now marker ---

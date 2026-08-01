@@ -120,7 +120,6 @@ class SmartAlarmMonitoringService : Service() {
         const val EXTRA_TARGET_MILLIS = "targetMillis"
         const val EXTRA_WINDOW_MINUTES = "windowMinutes"
 
-        private const val DEFAULT_WINDOW_MINUTES = 30
         private const val TICK_MILLIS = 5_000L
         private const val MAX_BUFFER_SAMPLES = 256
         // ~15s @ ~5Hz
