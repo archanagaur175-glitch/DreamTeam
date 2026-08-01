@@ -51,6 +51,7 @@ import com.dreamteam.feature.dashboard.DashboardViewModel
 import com.dreamteam.feature.sleepdebt.domain.RollingDebt
 import com.dreamteam.feature.smartalarm.domain.AlarmConfig
 import com.dreamteam.feature.smartalarm.domain.SensorMode
+import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -94,7 +95,7 @@ fun DashboardScreen(
             ) {
                 Column {
                     Text(
-                        text = LocalTime.now().format(DateTimeFormatter.ofPattern("EEE, MMM d")),
+                        text = LocalDate.now().format(DateTimeFormatter.ofPattern("EEE, MMM d")),
                         style = MaterialTheme.typography.labelMedium,
                         color = TextSecondary,
                     )
