@@ -280,7 +280,7 @@ private fun AlarmCard(alarm: AlarmConfig?, now: LocalTime, onOpen: () -> Unit) {
             .clip(RoundedCornerShape(Dimens.cardCorner))
             .background(NightSurface)
             .padding(Dimens.lg),
-        horizontalArrangement = Arrangement.spacedBy(Dimens.md),
+        verticalArrangement = Arrangement.spacedBy(Dimens.md),
     ) {
         SectionHeader(
             title = "Smart wake",
