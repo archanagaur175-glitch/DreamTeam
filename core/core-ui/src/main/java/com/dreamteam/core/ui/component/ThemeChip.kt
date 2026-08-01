@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dreamteam.core.common.FactorTag
@@ -45,7 +46,7 @@ fun ThemeChip(
             listOf(AccentIndigo.copy(alpha = 0.9f), AccentViolet.copy(alpha = 0.9f)),
         )
     } else {
-        Brush.solidColor(NightSurfaceHigh)
+        SolidColor(NightSurfaceHigh)
     }
     Box(
         modifier = modifier
