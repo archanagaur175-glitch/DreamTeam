@@ -1,0 +1,29 @@
+# Freebuff workspace files
+.freebuff/
+
+# Gradle
+.gradle/
+build/
+
+# Local configuration
+local.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+
+# Android build outputs
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+output.json
+
+# Keystores (never commit real signing keys)
+*.keystore
+*.jks
