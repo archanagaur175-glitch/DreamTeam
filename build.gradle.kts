@@ -10,3 +10,16 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.room) apply false
 }
+
+subprojects {
+    configurations.configureEach {
+        resolutionStrategy {
+            // Hilt/Dagger bundle an older kotlin-metadata-jvm than Kotlin 2.4 requires,
+            // so Dagger's processors fail with "Provided Metadata instance has version
+            // 2.4.0, while maximum supported version is 2.3.0". Force the version that
+            // matches our Kotlin so the Hilt KSP + javac processors can read the
+            // metadata of Kotlin 2.4-compiled classes.
+            force("org.jetbrains.kotlin:kotlin-metadata-jvm:${libs.versions.kotlin.get()}")
+        }
+    }
+}
