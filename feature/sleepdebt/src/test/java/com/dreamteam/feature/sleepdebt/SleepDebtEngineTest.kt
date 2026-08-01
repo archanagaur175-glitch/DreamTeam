@@ -79,8 +79,8 @@ class SleepDebtEngineTest {
         val previous = (14L until 28L).map { session(it, 6.0) }
         val debt = SleepDebtEngine.computeRollingDebt(current + previous, 8.0, today)
         assertEquals(14.0, debt.totalDeficitHours, 0.001)
-        assertEquals(28.0, debt.previousWindowTotalHours, 0.001)
-        assertEquals(-14.0, debt.trendHours, 0.001) // paying down
+        assertEquals(28.0, debt.previousWindowTotalHours!!, 0.001)
+        assertEquals(-14.0, debt.trendHours!!, 0.001) // paying down
     }
 
     @Test
