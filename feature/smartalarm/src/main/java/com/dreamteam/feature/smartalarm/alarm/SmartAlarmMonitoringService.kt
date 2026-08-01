@@ -1,5 +1,6 @@
 package com.dreamteam.feature.smartalarm.alarm
 
+import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -55,6 +56,9 @@ class SmartAlarmMonitoringService : Service() {
         return START_STICKY
     }
 
+    // FGS notifications are mandatory; on API 33+ a denied POST_NOTIFICATIONS just
+    // hides it (service still runs). lint can't see that, so suppress both checks.
+    @SuppressLint("NotificationPermission", "MissingPermission")
     private fun startAsForeground(targetMillis: Long) {
         val targetTime = targetMillis.toLocalDateTime().toLocalTime()
         val notification = NotificationHelper.monitoringNotification(
