@@ -85,7 +85,7 @@ class CircadianRepositoryImpl @Inject constructor(
     private val debtFlow = debtRepository.observeDebt()
 
     override fun observeCurve(): Flow<EnergyCurve> = combine(
-        sessionDao.observeSessions(),
+        sessionDao.observeSessions().map { list -> list.map { it.toDomain() } },
         debtFlow,
     ) { sessions, debt ->
         val wakeTime = sessions.firstOrNull()?.sleepEnd?.toLocalTime() ?: LocalTime.of(7, 0)

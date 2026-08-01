@@ -20,7 +20,8 @@ class AlarmTrigger @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
 
-    @SuppressLint("NotificationPermission")
+    // notify() is guarded by canPostNotifications() below; lint can't see the guard.
+    @SuppressLint("NotificationPermission", "MissingPermission")
     fun fire(targetMillis: Long = System.currentTimeMillis()) {
         val intent = Intent(context, AlarmRingingActivity::class.java)
             .putExtra(AlarmRingingActivity.EXTRA_TARGET_MILLIS, targetMillis)
